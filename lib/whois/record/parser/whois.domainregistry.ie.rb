@@ -42,6 +42,8 @@ module Whois
           case node("ren-status", &:downcase)
           when /^active/
             :registered
+          when ""
+            :registered
           when nil
             if node("status:pending")
               :registered
