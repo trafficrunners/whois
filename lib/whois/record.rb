@@ -294,6 +294,18 @@ module Whois
 
     # @!endgroup
 
+    def available?
+      if property_any_supported?(:available?)
+        parser.parsers.each do |p|
+          if p.respond_to?(:available?) && !p.available?
+            return false
+          end
+        end
+
+        return true
+      end
+    end
+
 
     private
 
