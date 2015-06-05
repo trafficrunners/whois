@@ -46,6 +46,8 @@ module Whois
             :available
           when "invalid"
             :invalid
+          when "redemptionPeriod"
+            :registered
           # NEWSTATUS inactive
           # The domain is registered, but there is not DNS entry for it.
           when "failed"

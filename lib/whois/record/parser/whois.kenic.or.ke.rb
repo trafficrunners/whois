@@ -30,6 +30,8 @@ module Whois
             case $1.downcase
             when "active"
               :registered
+            when "ok"
+              :registered
             when "not registered"
               :available
             when "this whois server does not have any records for that zone."
