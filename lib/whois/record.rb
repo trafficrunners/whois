@@ -297,7 +297,7 @@ module Whois
     def available?
       if property_any_supported?(:available?)
         parser.parsers.each do |p|
-          if p.respond_to?(:available?) && !p.available?
+          if !p.is_a?(Whois::Record::Parser::Blank) && p.respond_to?(:available?) && !p.available?
             return false
           end
         end
