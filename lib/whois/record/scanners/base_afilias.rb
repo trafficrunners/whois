@@ -54,6 +54,8 @@ module Whois
             end
           elsif @input.pos == 0 && @input.match?(/^(.+\n){3,}\n/)
             @ast["field:disclaimer"] = _scan_lines_to_array(/^(.+)\n/).join(" ")
+          elsif @input.pos == 0 && @input.match?(/^.+\n\n/)
+            @ast["field:disclaimer"] = _scan_lines_to_array(/^(.+)\n\n/).join(" ")
           end
         end
       end
