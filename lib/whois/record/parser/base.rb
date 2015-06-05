@@ -353,7 +353,11 @@ module Whois
         protected
 
         def content_for_scanner
-          @content_for_scanner ||= content.to_s.gsub(/\r\n/, "\n")
+          begin
+            @content_for_scanner ||= content.to_s.gsub(/\r\n/, "\n")
+          rescue ArgumentError => e
+            @content_for_scanner ||= content.to_s.force_encoding("ASCII-8BIT").force_encoding('UTF-8').gsub("\u0000", "").scrub.gsub(/\r\n/, "\n")
+          end
         end
 
         def cached_properties_fetch(key)
