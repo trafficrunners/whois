@@ -44,6 +44,8 @@ module Whois
             :registered
           when ""
             :registered
+          when 'involuntary nrp'
+            :redemption
           when nil
             if node("status:pending")
               :registered
@@ -51,7 +53,7 @@ module Whois
               :available
             end
           else
-            Whois.bug!(ParserError, "Unknown status `#{node("status")}'.")
+            Whois.bug!(ParserError, "Unknown status `#{node("ren-status")}'.")
           end
         end
 
