@@ -45,7 +45,7 @@ module Whois
               :redemption
             when "220 available"
               :available
-            when "404 request denied"
+            when "404 request denied", "230 prohibited"
               :error
             when /invalid characters/
               :invalid
@@ -133,7 +133,7 @@ module Whois
           end
         end
 
-      
+
       private
 
         def build_contact(element, type)
