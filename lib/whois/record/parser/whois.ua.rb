@@ -28,7 +28,8 @@ module Whois
           def status
             if content =~ /status:\s+(.+?)\n/
               case (s = $1.downcase)
-              when "ok", "clienthold", "autorenewgraceperiod", "clienttransferprohibited"
+              when "ok", "clienthold", "autorenewgraceperiod",
+                "clienttransferprohibited", "clientupdateprohibited"
                 :registered
               when "redemptionperiod", "pendingdelete"
                 :redemption
