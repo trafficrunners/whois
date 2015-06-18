@@ -50,6 +50,10 @@ module Whois
           @input.skip(/^[\s]*\n/)
         end
 
+        tokenizer :skip_dashes_line do
+          @input.skip(/^[-\s]*\n/)
+        end
+
         tokenizer :skip_newline do
           @input.skip(/\n/)
         end
@@ -108,6 +112,7 @@ module Whois
           tokenizers.each do |tokenizer|
             return if send(tokenizer)
           end
+
           unexpected_token
         end
 

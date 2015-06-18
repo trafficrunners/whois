@@ -13,3 +13,6 @@ Gemfile.lock
 yardoc/
 
 *.swp
+
+# Sublime project files
+*.sublime-*

@@ -39,17 +39,25 @@ module Whois
           node("Domain ID")
         end
 
-
         property_supported :status do
-          case (s = node("Domain Status", &:downcase))
-          when "available"
+          unavailable_statuses = [
+           'premium name',
+           'serverHold',
+           'clientTransferProhibited',
+           'serverTransferProhibited',
+           'serverUpdateProhibited'
+          ].to_set
+
+          statuses = domain_statuses
+
+          if statuses.include?('available')
             :available
-          when "ok"
+          elsif statuses.include?('ok')
             :registered
-          when "premium name"
+          elsif (statuses.any? { |x| unavailable_statuses.include?(x) })
             :unavailable
           else
-            Whois.bug!(ParserError, "Unknown status `#{s}'.")
+            Whois.bug!(ParserError, "Unknown status `#{statuses.join(' ')}'.")
           end
         end
 
@@ -105,6 +113,10 @@ module Whois
 
 
       private
+
+        def domain_statuses
+          Array(node('Domain Status')).map { |v| v.split.first.downcase }
+        end
 
         def parse_time(value)
           # Hack to remove usec. Do you know a better way?

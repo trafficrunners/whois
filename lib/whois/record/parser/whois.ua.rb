@@ -28,7 +28,8 @@ module Whois
           def status
             if content =~ /status:\s+(.+?)\n/
               case (s = $1.downcase)
-              when "ok", "clienthold", "autorenewgraceperiod", "clienttransferprohibited"
+              when "ok", "clienthold", "autorenewgraceperiod",
+                "clienttransferprohibited", "clientupdateprohibited"
                 :registered
               when "redemptionperiod", "pendingdelete"
                 :redemption
@@ -65,10 +66,11 @@ module Whois
 
             contact_ids.map do |contact_id|
               textblock = content.slice(/contact-id:\s+#{contact_id}\n((?:.+\n)+)\n/, 1)
+              next unless textblock
 
               address = textblock.scan(/address:\s+(.+)\n/).flatten
               address = address.reject { |a| a == "n/a" }
-              
+
               Record::Contact.new(
                 type:         type,
                 id:           contact_id,
@@ -84,7 +86,7 @@ module Whois
                 email:        textblock.slice(/e-mail:\s+(.+)\n/, 1),
                 created_on:   Time.parse(textblock.slice(/created:\s+(.+)\n/, 1))
               )
-            end
+            end.compact
           end
         end
 
@@ -130,7 +132,7 @@ module Whois
             end
           end
 
-          
+
           def build_contact(element, type)
             contact_ids = content.scan(/#{element}:\s+(.+)\n/).flatten
             return if contact_ids.empty?
@@ -144,7 +146,7 @@ module Whois
               zip = address[1].slice!(/\d{5}\s+/).strip if address[1] =~ /\d{5}\s+/
               state = nil
               state = address[1].slice!(/\s+[A-Z]{2}\z/).strip if address[1] =~ /\s+[A-Z]{2}\z/
-              
+
               Record::Contact.new(
                 type:         type,
                 id:           contact_id,
@@ -173,7 +175,7 @@ module Whois
 
         property_not_supported :domain_id
 
-  
+
         property_supported :status do
           subparser.status
         end

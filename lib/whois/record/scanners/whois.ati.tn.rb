@@ -22,6 +22,8 @@ module Whois
             :scan_available,
             :scan_disclaimer,
             :scan_keyvalue,
+            :skip_java_whois_header,
+            :skip_dashes_line
         ]
 
 
@@ -37,6 +39,10 @@ module Whois
           end
         end
 
+        tokenizer :skip_java_whois_header do
+          @input.skip(/.+JWhoisServer.+/) ||
+          @input.skip(/Java Whois Server.+/)
+        end
       end
 
     end
