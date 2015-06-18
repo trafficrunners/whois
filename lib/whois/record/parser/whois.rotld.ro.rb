@@ -30,6 +30,8 @@ module Whois
             case $1.downcase
             when "ok", "updateprohibited"
               :registered
+            when "pendingdelete"
+              :redemption
             else
               Whois.bug!(ParserError, "Unknown status `#{$1}'.")
             end
