@@ -3,7 +3,7 @@
 #
 # An intelligent pure Ruby WHOIS client and parser.
 #
-# Copyright (c) 2009-2014 Simone Carletti <weppos@weppos.net>
+# Copyright (c) 2009-2015 Simone Carletti <weppos@weppos.net>
 #++
 
 
@@ -48,13 +48,13 @@ module Whois
 
 
         property_supported :created_on do
-          node("Registration Date") { |value| Time.parse(value) }
+          node("Registration Time") { |value| Time.parse(value) }
         end
 
         property_not_supported :updated_on
 
         property_supported :expires_on do
-          node("Expiration Date") { |value| Time.parse(value) }
+          node("Expiration Time") { |value| Time.parse(value) }
         end
 
 
@@ -80,7 +80,7 @@ module Whois
 
         property_supported :nameservers do
           Array.wrap(node("Name Server")).map do |name|
-            Nameserver.new(:name => name.downcase)
+            Nameserver.new(name: name.downcase)
           end
         end
 

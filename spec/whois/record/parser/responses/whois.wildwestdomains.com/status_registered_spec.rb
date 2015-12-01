@@ -28,7 +28,7 @@ describe Whois::Record::Parser::WhoisWildwestdomainsCom, "status_registered.expe
   end
   describe "#domain_id" do
     it do
-      expect(subject.domain_id).to eq(nil)
+      expect(subject.domain_id).to eq("33386184_DOMAIN_COM-VRSN")
     end
   end
   describe "#status" do
@@ -49,25 +49,25 @@ describe Whois::Record::Parser::WhoisWildwestdomainsCom, "status_registered.expe
   describe "#created_on" do
     it do
       expect(subject.created_on).to be_a(Time)
-      expect(subject.created_on).to eq(Time.parse("2000-08-22 18:29:11"))
+      expect(subject.created_on).to eq(Time.parse("2000-08-22 23:29:11 UTC"))
     end
   end
   describe "#updated_on" do
     it do
       expect(subject.updated_on).to be_a(Time)
-      expect(subject.updated_on).to eq(Time.parse("2011-11-01 16:31:47"))
+      expect(subject.updated_on).to eq(Time.parse("2011-11-01 21:31:47 UTC"))
     end
   end
   describe "#expires_on" do
     it do
       expect(subject.expires_on).to be_a(Time)
-      expect(subject.expires_on).to eq(Time.parse("2021-11-01 06:59:59"))
+      expect(subject.expires_on).to eq(Time.parse("2021-11-01 11:59:59 UTC"))
     end
   end
   describe "#registrar" do
     it do
       expect(subject.registrar).to be_a(Whois::Record::Registrar)
-      expect(subject.registrar.id).to eq(nil)
+      expect(subject.registrar.id).to eq("440")
       expect(subject.registrar.name).to eq("Wild West Domains, LLC")
       expect(subject.registrar.organization).to eq("Wild West Domains, LLC")
       expect(subject.registrar.url).to eq("http://www.wildwestdomains.com")
@@ -76,21 +76,21 @@ describe Whois::Record::Parser::WhoisWildwestdomainsCom, "status_registered.expe
   describe "#registrant_contacts" do
     it do
       expect(subject.registrant_contacts).to be_a(Array)
-      expect(subject.registrant_contacts).to have(1).items
+      expect(subject.registrant_contacts.size).to eq(1)
       expect(subject.registrant_contacts[0]).to be_a(Whois::Record::Contact)
       expect(subject.registrant_contacts[0].type).to eq(Whois::Record::Contact::TYPE_REGISTRANT)
       expect(subject.registrant_contacts[0].id).to eq(nil)
-      expect(subject.registrant_contacts[0].name).to eq("Wild West Domains Wild West Domains")
-      expect(subject.registrant_contacts[0].organization).to eq("Wild West Domains")
-      expect(subject.registrant_contacts[0].address).to eq("14455 N Hayden Rd Suite 219")
+      expect(subject.registrant_contacts[0].name).to eq("Registration Private")
+      expect(subject.registrant_contacts[0].organization).to eq("Domains By Proxy, LLC")
+      expect(subject.registrant_contacts[0].address).to eq("DomainsByProxy.com, 14747 N Northsight Blvd Suite 111, PMB 309")
       expect(subject.registrant_contacts[0].city).to eq("Scottsdale")
       expect(subject.registrant_contacts[0].zip).to eq("85260")
       expect(subject.registrant_contacts[0].state).to eq("Arizona")
       expect(subject.registrant_contacts[0].country).to eq(nil)
       expect(subject.registrant_contacts[0].country_code).to eq("United States")
-      expect(subject.registrant_contacts[0].phone).to eq("")
-      expect(subject.registrant_contacts[0].fax).to eq("")
-      expect(subject.registrant_contacts[0].email).to eq("")
+      expect(subject.registrant_contacts[0].phone).to eq("+1.4806242599")
+      expect(subject.registrant_contacts[0].fax).to eq("+1.4806242598")
+      expect(subject.registrant_contacts[0].email).to eq("WILDWESTDOMAINS.COM@domainsbyproxy.com")
       expect(subject.registrant_contacts[0].created_on).to eq(nil)
       expect(subject.registrant_contacts[0].updated_on).to eq(nil)
     end
@@ -98,21 +98,21 @@ describe Whois::Record::Parser::WhoisWildwestdomainsCom, "status_registered.expe
   describe "#admin_contacts" do
     it do
       expect(subject.admin_contacts).to be_a(Array)
-      expect(subject.admin_contacts).to have(1).items
+      expect(subject.admin_contacts.size).to eq(1)
       expect(subject.admin_contacts[0]).to be_a(Whois::Record::Contact)
       expect(subject.admin_contacts[0].type).to eq(Whois::Record::Contact::TYPE_ADMINISTRATIVE)
       expect(subject.admin_contacts[0].id).to eq(nil)
-      expect(subject.admin_contacts[0].name).to eq("Wild West Domains Wild West Domains")
-      expect(subject.admin_contacts[0].organization).to eq("Wild West Domains")
-      expect(subject.admin_contacts[0].address).to eq("14455 N Hayden Rd Suite 219")
+      expect(subject.admin_contacts[0].name).to eq("Registration Private")
+      expect(subject.admin_contacts[0].organization).to eq("Domains By Proxy, LLC")
+      expect(subject.admin_contacts[0].address).to eq("DomainsByProxy.com, 14747 N Northsight Blvd Suite 111, PMB 309")
       expect(subject.admin_contacts[0].city).to eq("Scottsdale")
       expect(subject.admin_contacts[0].zip).to eq("85260")
       expect(subject.admin_contacts[0].state).to eq("Arizona")
       expect(subject.admin_contacts[0].country).to eq(nil)
       expect(subject.admin_contacts[0].country_code).to eq("United States")
-      expect(subject.admin_contacts[0].phone).to eq("+1.4805058800")
-      expect(subject.admin_contacts[0].fax).to eq("+1.4805058844")
-      expect(subject.admin_contacts[0].email).to eq("dns@wildwestdomains.com")
+      expect(subject.admin_contacts[0].phone).to eq("+1.4806242599")
+      expect(subject.admin_contacts[0].fax).to eq("+1.4806242598")
+      expect(subject.admin_contacts[0].email).to eq("WILDWESTDOMAINS.COM@domainsbyproxy.com")
       expect(subject.admin_contacts[0].created_on).to eq(nil)
       expect(subject.admin_contacts[0].updated_on).to eq(nil)
     end
@@ -120,21 +120,21 @@ describe Whois::Record::Parser::WhoisWildwestdomainsCom, "status_registered.expe
   describe "#technical_contacts" do
     it do
       expect(subject.technical_contacts).to be_a(Array)
-      expect(subject.technical_contacts).to have(1).items
+      expect(subject.technical_contacts.size).to eq(1)
       expect(subject.technical_contacts[0]).to be_a(Whois::Record::Contact)
       expect(subject.technical_contacts[0].type).to eq(Whois::Record::Contact::TYPE_TECHNICAL)
       expect(subject.technical_contacts[0].id).to eq(nil)
-      expect(subject.technical_contacts[0].name).to eq("Wild West Domains Wild West Domains")
-      expect(subject.technical_contacts[0].organization).to eq("Wild West Domains")
-      expect(subject.technical_contacts[0].address).to eq("14455 N Hayden Rd Suite 219")
+      expect(subject.technical_contacts[0].name).to eq("Registration Private")
+      expect(subject.technical_contacts[0].organization).to eq("Domains By Proxy, LLC")
+      expect(subject.technical_contacts[0].address).to eq("DomainsByProxy.com, 14747 N Northsight Blvd Suite 111, PMB 309")
       expect(subject.technical_contacts[0].city).to eq("Scottsdale")
       expect(subject.technical_contacts[0].zip).to eq("85260")
       expect(subject.technical_contacts[0].state).to eq("Arizona")
       expect(subject.technical_contacts[0].country).to eq(nil)
       expect(subject.technical_contacts[0].country_code).to eq("United States")
-      expect(subject.technical_contacts[0].phone).to eq("+1.4805058800")
-      expect(subject.technical_contacts[0].fax).to eq("+1.4805058844")
-      expect(subject.technical_contacts[0].email).to eq("dns@wildwestdomains.com")
+      expect(subject.technical_contacts[0].phone).to eq("+1.4806242599")
+      expect(subject.technical_contacts[0].fax).to eq("+1.4806242598")
+      expect(subject.technical_contacts[0].email).to eq("WILDWESTDOMAINS.COM@domainsbyproxy.com")
       expect(subject.technical_contacts[0].created_on).to eq(nil)
       expect(subject.technical_contacts[0].updated_on).to eq(nil)
     end
@@ -142,7 +142,7 @@ describe Whois::Record::Parser::WhoisWildwestdomainsCom, "status_registered.expe
   describe "#nameservers" do
     it do
       expect(subject.nameservers).to be_a(Array)
-      expect(subject.nameservers).to have(3).items
+      expect(subject.nameservers.size).to eq(3)
       expect(subject.nameservers[0]).to be_a(Whois::Record::Nameserver)
       expect(subject.nameservers[0].name).to eq("cns1.secureserver.net")
       expect(subject.nameservers[1]).to be_a(Whois::Record::Nameserver)

@@ -3,7 +3,7 @@
 #
 # An intelligent pure Ruby WHOIS client and parser.
 #
-# Copyright (c) 2009-2014 Simone Carletti <weppos@weppos.net>
+# Copyright (c) 2009-2015 Simone Carletti <weppos@weppos.net>
 #++
 
 
@@ -80,7 +80,7 @@ module Whois
 
         # TODO: timezone ('Asia/Tokyo')
         property_supported :expires_on do
-          if content_for_scanner =~ /\[Expires on\][ \t]+(.*)\n/
+          if content_for_scanner =~ /\[(?:Expires on|State)\][ \t]+(.*)\n/
             ($1.empty?) ? nil : Time.parse($1)
           end
         end
